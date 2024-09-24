@@ -26,9 +26,11 @@ class SplashPage extends StatelessWidget {
             );
           } else {
             // Navega para a página principal após o carregamento
-            Future.microtask(() {
-              Navigator.of(context).pushReplacementNamed('/home');
-            });
+            Future.microtask(
+              () {
+                Navigator.of(context).pushReplacementNamed('/home');
+              },
+            );
             return Container(); // Retorna um container vazio enquanto navega
           }
         },
