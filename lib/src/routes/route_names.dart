@@ -1,4 +1,4 @@
 class RouteNames {
-  static const String splash = '/';
+  static const String main = '/';
   static const String home = '/home';
 }
