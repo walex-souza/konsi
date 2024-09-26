@@ -41,6 +41,22 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$currentAddressAtom =
+      Atom(name: 'HomeControllerBase.currentAddress', context: context);
+
+  @override
+  AddressModel? get currentAddress {
+    _$currentAddressAtom.reportRead();
+    return super.currentAddress;
+  }
+
+  @override
+  set currentAddress(AddressModel? value) {
+    _$currentAddressAtom.reportWrite(value, super.currentAddress, () {
+      super.currentAddress = value;
+    });
+  }
+
   late final _$errorAtom =
       Atom(name: 'HomeControllerBase.error', context: context);
 
@@ -137,6 +153,22 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$selectedIndexAtom =
+      Atom(name: 'HomeControllerBase.selectedIndex', context: context);
+
+  @override
+  int get selectedIndex {
+    _$selectedIndexAtom.reportRead();
+    return super.selectedIndex;
+  }
+
+  @override
+  set selectedIndex(int value) {
+    _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
+      super.selectedIndex = value;
+    });
+  }
+
   late final _$fetchCurrentLocationAsyncAction =
       AsyncAction('HomeControllerBase.fetchCurrentLocation', context: context);
 
@@ -166,22 +198,22 @@ mixin _$HomeController on HomeControllerBase, Store {
       ActionController(name: 'HomeControllerBase', context: context);
 
   @override
-  void updateSearchText(String? value) {
+  void changeIndex(int index) {
     final _$actionInfo = _$HomeControllerBaseActionController.startAction(
-        name: 'HomeControllerBase.updateSearchText');
+        name: 'HomeControllerBase.changeIndex');
     try {
-      return super.updateSearchText(value);
+      return super.changeIndex(index);
     } finally {
       _$HomeControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void _filterSuggestionsCep() {
+  void updateSearchText(String? value) {
     final _$actionInfo = _$HomeControllerBaseActionController.startAction(
-        name: 'HomeControllerBase._filterSuggestionsCep');
+        name: 'HomeControllerBase.updateSearchText');
     try {
-      return super._filterSuggestionsCep();
+      return super.updateSearchText(value);
     } finally {
       _$HomeControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -203,12 +235,14 @@ mixin _$HomeController on HomeControllerBase, Store {
     return '''
 searchText: ${searchText},
 address: ${address},
+currentAddress: ${currentAddress},
 error: ${error},
 coordinates: ${coordinates},
 suggestions: ${suggestions},
 currentPosition: ${currentPosition},
 errorMessage: ${errorMessage},
-mapController: ${mapController}
+mapController: ${mapController},
+selectedIndex: ${selectedIndex}
     ''';
   }
 }

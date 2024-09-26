@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:konsi/src/pages/home_page/home_controller.dart';
 import 'package:konsi/src/pages/home_page/widgets/loading_page_widget.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homeController = HomeController();
+  final HomeController homeController = GetIt.I<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +59,29 @@ class _HomePageState extends State<HomePage> {
                           homeController.coordinates!['lat'],
                           homeController.coordinates!['lng'],
                         ),
-                      )
+                      ),
+                  },
+                  onTap: (position) async {
+                    var data = await homeController.fetchAddressFromCoordinates(
+                        position.latitude, position.longitude);
+                    _showBottomSheet(context, data);
                   },
                 );
               }
             },
           ),
+          Observer(builder: (_) {
+            return Visibility(
+              visible: homeController.suggestions.isNotEmpty &&
+                  homeController.searchText != '',
+              child: Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: SuggestionCepListWidget(homeController: homeController),
+              ),
+            );
+          }),
           Observer(builder: (_) {
             return Visibility(
               visible: homeController.currentPosition != null,
@@ -77,47 +95,83 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }),
-          Observer(builder: (_) {
-            return Visibility(
-              visible: homeController.searchText != '',
-              child: Positioned(
-                top: 120,
-                left: 16,
-                right: 16,
-                child: SuggestionCepListWidget(homeController: homeController),
-              ),
-            );
-          })
         ],
       ),
-      bottomNavigationBar: Observer(
-        builder: (_) {
-          return Visibility(
-            visible: homeController.currentPosition != null,
-            child: BottomNavigationBar(
-              onTap: (index) {},
-              items: [
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'assets/icons/maps_icon.png',
-                    height: 20,
-                    width: 20,
+    );
+  }
+
+  void _showBottomSheet(BuildContext context, data) {
+    showModalBottomSheet(
+      useRootNavigator: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 250,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Center(
+                child: SizedBox(
+                  height: 4,
+                  width: 32,
+                  child: Divider(
+                    color: Color(0xff5E6772),
                   ),
-                  label: 'Mapa',
                 ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'assets/icons/notebook_icon.png',
-                    height: 20,
-                    width: 20,
+              ),
+              const SizedBox(height: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    data.cep,
+                    style: TextStyle(fontSize: 24),
                   ),
-                  label: 'Caderneta',
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                  SizedBox(height: 10),
+                ],
+              ),
+              Wrap(
+                children: [
+                  Text(
+                    '${data.logradouro} ',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    data.bairro != '' ? ' - ${data.bairro}, ' : '',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    '${data.localidade} - ',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    data.uf,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); // Fecha o Bottom Sheet
+                },
+                child: const Text('Fechar'),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

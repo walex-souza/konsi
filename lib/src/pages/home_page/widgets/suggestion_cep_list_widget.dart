@@ -23,29 +23,31 @@ class SuggestionCepListWidget extends StatelessWidget {
       ),
       child: Observer(
         builder: (_) {
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (context, index) => const Divider(),
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(), // Evita rolagem
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.only(
+                top: 120, left: 15, right: 15, bottom: 10), // Evita rolagem
             itemCount: homeController.suggestions.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Row(
+                title: Column(
                   children: [
-                    Image.asset(
-                      'assets/icons/cep_icon.png',
-                      height: 40,
-                      width: 40,
-                    ),
-                    const SizedBox(width: 20),
-                    Column(
+                    Row(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(homeController.suggestions[index].cep),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.6,
-                              child: RichText(
+                        Image.asset(
+                          'assets/icons/cep_icon.png',
+                          height: 40,
+                          width: 40,
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(homeController.suggestions[index].cep),
+                              RichText(
                                 softWrap: false,
                                 overflow: TextOverflow.ellipsis,
                                 text: TextSpan(
@@ -69,8 +71,8 @@ class SuggestionCepListWidget extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,6 +20,9 @@ abstract class HomeControllerBase with Store {
   AddressModel? address;
 
   @observable
+  AddressModel? currentAddress;
+
+  @observable
   String? error;
 
   @observable
@@ -40,6 +41,14 @@ abstract class HomeControllerBase with Store {
 
   @observable
   GoogleMapController? mapController;
+
+  @observable
+  int selectedIndex = 0;
+
+  @action
+  void changeIndex(int index) {
+    selectedIndex = index;
+  }
 
   @action
   Future<void> fetchCurrentLocation() async {
@@ -80,18 +89,10 @@ abstract class HomeControllerBase with Store {
   }
 
   @action
-  void _filterSuggestionsCep() {}
-
-  @action
   Future<void> searchCep(String cep) async {
     error = null; // Reseta o erro
     address = await _cepService.searchCep(cep);
     if (address == null) {
-      if (searchText.isNotEmpty && suggestions.isNotEmpty) {
-        suggestions.any((cep) => cep.cep.contains(searchText));
-      } else {
-        // suggestions.clear();
-      }
       error = 'CEP não encontrado.';
     } else {
       if (!suggestions.any((e) => e.cep == searchText)) {
@@ -123,5 +124,17 @@ abstract class HomeControllerBase with Store {
         ),
       );
     }
+  }
+
+  Future<AddressModel?> fetchAddressFromCoordinates(
+      double latitude, double longitude) async {
+    AddressModel? address =
+        await geocodingService.getLatLngToAddress(latitude, longitude);
+    if (address != null) {
+      return address;
+    } else {
+      print('Endereço não encontrado.');
+    }
+    return null;
   }
 }
