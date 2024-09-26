@@ -19,8 +19,8 @@ class TextFieldWidget extends StatelessWidget {
       keyboardType: textInputType,
       controller: controller,
       enabled: enabled ?? false,
-      style: const TextStyle(
-        color: Color(0xff7C7C7C),
+      style: TextStyle(
+        color: enabled == false ? const Color(0xff7C7C7C) : Colors.black,
         fontWeight: FontWeight.w600,
       ),
       decoration: InputDecoration(

@@ -32,16 +32,19 @@ class ReviewAddressPage extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             TextFieldWidget(
+                enabled: false,
                 labelText: 'CEP',
                 controller: TextEditingController(text: address?.cep)),
             const SizedBox(height: 20),
             TextFieldWidget(
+              enabled: false,
               labelText: 'Endereço',
               controller: TextEditingController(
-                  text: '${address?.logradouro ?? ''} - '
-                      '${address?.bairro}, '
-                      '${address?.localidade} - '
-                      '${address?.uf}'),
+                text: '${address?.logradouro ?? ''} - '
+                    '${address?.bairro}, '
+                    '${address?.localidade} - '
+                    '${address?.uf}',
+              ),
             ),
             const SizedBox(height: 20),
             TextFieldWidget(
