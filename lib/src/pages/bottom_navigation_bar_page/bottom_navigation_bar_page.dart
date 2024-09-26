@@ -27,7 +27,7 @@ class BottomNavigationBarPage extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/icons/maps_icon.png',
+                'assets/icons/map_icon.png',
                 height: 20,
                 width: 20,
               ),
@@ -35,6 +35,7 @@ class BottomNavigationBarPage extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
+                color: Color(0xff2E8896),
                 'assets/icons/notebook_icon.png',
                 height: 20,
                 width: 20,

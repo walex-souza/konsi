@@ -26,6 +26,9 @@ abstract class HomeControllerBase with Store {
   String? error;
 
   @observable
+  bool searchCepError = false;
+
+  @observable
   Map<String, dynamic>? coordinates;
 
   @observable
@@ -85,7 +88,12 @@ abstract class HomeControllerBase with Store {
   @action
   void updateSearchText(String? value) {
     searchText = value ?? '';
-    searchCep(value ?? '');
+    if (!searchText.contains('-') && searchText.length == 8) {
+      String? modified = "${value!.substring(0, 5)}-${value.substring(5)}";
+      searchCep(modified);
+    } else {
+      searchCep(value ?? '');
+    }
   }
 
   @action
@@ -94,8 +102,9 @@ abstract class HomeControllerBase with Store {
     address = await _cepService.searchCep(cep);
     if (address == null) {
       error = 'CEP não encontrado.';
+      searchCepError = true;
     } else {
-      if (!suggestions.any((e) => e.cep == searchText)) {
+      if (!suggestions.any((e) => e.cep == cep)) {
         suggestions.add(
           AddressModel(
               cep: address?.cep ?? '',
@@ -105,7 +114,7 @@ abstract class HomeControllerBase with Store {
               uf: address?.uf ?? ''),
         );
       }
-
+      searchCepError = false;
       await getCoordinates(address!.formattedAddress);
     }
   }

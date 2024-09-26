@@ -73,6 +73,22 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$searchCepErrorAtom =
+      Atom(name: 'HomeControllerBase.searchCepError', context: context);
+
+  @override
+  bool get searchCepError {
+    _$searchCepErrorAtom.reportRead();
+    return super.searchCepError;
+  }
+
+  @override
+  set searchCepError(bool value) {
+    _$searchCepErrorAtom.reportWrite(value, super.searchCepError, () {
+      super.searchCepError = value;
+    });
+  }
+
   late final _$coordinatesAtom =
       Atom(name: 'HomeControllerBase.coordinates', context: context);
 
@@ -237,6 +253,7 @@ searchText: ${searchText},
 address: ${address},
 currentAddress: ${currentAddress},
 error: ${error},
+searchCepError: ${searchCepError},
 coordinates: ${coordinates},
 suggestions: ${suggestions},
 currentPosition: ${currentPosition},

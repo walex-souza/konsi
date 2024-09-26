@@ -97,6 +97,37 @@ class _HomePageState extends State<HomePage> {
           }),
         ],
       ),
+      floatingActionButton: Observer(
+        builder: (_) {
+          return Visibility(
+            visible: homeController.currentPosition != null,
+            child: FloatingActionButton(
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(30.0), // Arredondar as bordas
+              ),
+              backgroundColor: const Color(0xff2E8896),
+
+              onPressed: () async {
+                homeController.updateSearchText(homeController.searchText);
+
+                if (homeController.searchCepError) {
+                  showSnackbarSearchCepError(
+                      context, 'O CEP informado não foi encontrado.');
+                }
+                homeController
+                    .moveCameraToCoordinates(homeController.mapController!);
+                homeController.searchText = '';
+              },
+              tooltip: 'Adicionar',
+              child: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ), // Texto que aparece ao segurar o botão
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -172,6 +203,16 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       },
+    );
+  }
+
+  void showSnackbarSearchCepError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: const Color(0xff2E8896),
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
     );
   }
 }
