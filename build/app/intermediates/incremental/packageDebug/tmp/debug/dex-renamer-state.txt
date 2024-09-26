@@ -1,4 +1,4 @@
-#Thu Sep 26 16:55:01 BRT 2024
+#Thu Sep 26 17:10:02 BRT 2024
 base.0=C\:\\Users\\walex\\OneDrive\\Documentos\\konsi\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\walex\\OneDrive\\Documentos\\konsi\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\walex\\OneDrive\\Documentos\\konsi\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex

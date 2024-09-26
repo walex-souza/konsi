@@ -26,19 +26,48 @@ class BottomNavigationBarPage extends StatelessWidget {
           unselectedFontSize: 12,
           items: [
             BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/map_icon.png',
-                height: 20,
-                width: 20,
+              icon: Container(
+                height: 32,
+                width: 64,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: bottomNavigationBarController.selectedIndex == 0
+                      ? const Color(0xffEBF5F7)
+                      : Colors.transparent,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    color: bottomNavigationBarController.selectedIndex == 0
+                        ? const Color(0xff2E8896)
+                        : Colors.grey,
+                    'assets/icons/map_icon.png',
+                  ),
+                ),
               ),
               label: 'Mapa',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                color: Color(0xff2E8896),
-                'assets/icons/notebook_icon.png',
-                height: 20,
-                width: 20,
+              icon: Container(
+                height: 32,
+                width: 64,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: bottomNavigationBarController.selectedIndex == 1
+                      ? const Color(0xffEBF5F7)
+                      : Colors.transparent,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    color: bottomNavigationBarController.selectedIndex == 1
+                        ? const Color(0xff2E8896)
+                        : Colors.grey,
+                    'assets/icons/notebook_icon.png',
+                    height: 20,
+                    width: 20,
+                  ),
+                ),
               ),
               label: 'Caderneta',
             ),

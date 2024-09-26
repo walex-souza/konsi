@@ -158,9 +158,12 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     data.cep,
-                    style: TextStyle(fontSize: 24),
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
               Wrap(
@@ -193,11 +196,25 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context); // Fecha o Bottom Sheet
-                },
-                child: const Text('Fechar'),
+              Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(5.0), // Bordas arredondadas
+                      ),
+                      backgroundColor: const Color(0xff2E8896),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context); // Fecha o Bottom Sheet
+                    },
+                    child: const Text('Salvar endereço',
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
+                  ),
+                ),
               ),
             ],
           ),
