@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:konsi/src/models/address_model.dart';
 
@@ -15,7 +16,7 @@ class GeocodingService {
         };
       }
     } catch (e) {
-      print('Erro ao consultar coordenadas: $e');
+      debugPrint('Erro ao consultar coordenadas: $e');
     }
     return null;
   }
@@ -38,7 +39,7 @@ class GeocodingService {
         );
       }
     } catch (e) {
-      print('Erro ao obter o endereço: $e');
+      debugPrint('Erro ao obter o endereço: $e');
     }
 
     return null;

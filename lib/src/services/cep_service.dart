@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../models/address_model.dart';
 import 'dio_service.dart';
 
@@ -16,7 +18,7 @@ class CepService {
         return AddressModel.fromJson(response.data);
       }
     } catch (e) {
-      print('Erro ao buscar o CEP: $e');
+      debugPrint('Erro ao buscar o CEP: $e');
     }
     return null;
   }

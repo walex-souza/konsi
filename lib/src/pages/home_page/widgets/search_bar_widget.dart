@@ -13,6 +13,7 @@ class SearchBarWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       elevation: 4,
       child: TextField(
+        keyboardType: TextInputType.phone,
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: 'Buscar',

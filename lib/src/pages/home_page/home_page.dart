@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:konsi/src/common/widgets/primaryButton_widget.dart';
+import 'package:konsi/src/models/address_model.dart';
 import 'package:konsi/src/pages/home_page/home_controller.dart';
 import 'package:konsi/src/pages/home_page/widgets/loading_page_widget.dart';
 import 'package:konsi/src/pages/home_page/widgets/search_bar_widget.dart';
 import 'package:konsi/src/pages/home_page/widgets/suggestion_cep_list_widget.dart';
+import 'package:konsi/src/routes/route_names.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -64,7 +67,10 @@ class _HomePageState extends State<HomePage> {
                   onTap: (position) async {
                     var data = await homeController.fetchAddressFromCoordinates(
                         position.latitude, position.longitude);
-                    _showBottomSheet(context, data);
+                    if (mounted) {
+                      // ignore: use_build_context_synchronously
+                      _showBottomSheet(context, data);
+                    }
                   },
                 );
               }
@@ -197,23 +203,21 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
               Center(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.09,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(5.0), // Bordas arredondadas
+                child: PrimaryButtonWidget(
+                  title: 'Salvar endereço',
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      RouteNames.reviewAddress,
+                      arguments: AddressModel(
+                        cep: data.cep,
+                        logradouro: data.logradouro,
+                        bairro: data.bairro,
+                        localidade: data.localidade,
+                        uf: data.uf,
                       ),
-                      backgroundColor: const Color(0xff2E8896),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context); // Fecha o Bottom Sheet
-                    },
-                    child: const Text('Salvar endereço',
-                        style: TextStyle(color: Colors.white, fontSize: 18)),
-                  ),
+                    );
+                  },
                 ),
               ),
             ],

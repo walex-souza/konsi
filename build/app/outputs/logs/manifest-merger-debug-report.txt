@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:5:5-39:19
+INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:6:5-40:19
 INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml
 MERGED from [:geolocator_android] C:\Users\walex\OneDrive\Documentos\konsi\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-13:19
 MERGED from [:geolocator_android] C:\Users\walex\OneDrive\Documentos\konsi\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-13:19
@@ -35,8 +35,8 @@ MERGED from [com.google.maps.android:android-maps-utils:3.6.0] C:\Users\walex\.g
 	android:name
 		INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml
 manifest
-ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:1:1-51:12
-MERGED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:1:1-51:12
+ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:1:1-52:12
+MERGED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:1:1-52:12
 INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml:1:1-7:12
@@ -96,26 +96,28 @@ uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
 ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:4:5-85
 	android:name
 		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:4:22-82
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:5:5-66
+MERGED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:5:5-66
+MERGED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:5:5-66
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\walex\.gradle\caches\transforms-3\8bbca67cc5a32c5ad0e6edc351921bed\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\walex\.gradle\caches\transforms-3\8bbca67cc5a32c5ad0e6edc351921bed\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:5:22-64
 queries
-ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:45:5-50:15
+ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:46:5-51:15
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\walex\.gradle\caches\transforms-3\8bbca67cc5a32c5ad0e6edc351921bed\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\walex\.gradle\caches\transforms-3\8bbca67cc5a32c5ad0e6edc351921bed\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
 intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
-ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:46:9-49:18
+ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:47:9-50:18
 action#android.intent.action.PROCESS_TEXT
-ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:47:13-72
+ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:48:13-72
 	android:name
-		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:47:21-70
+		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:48:21-70
 data
-ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:48:13-50
+ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:49:13-50
 	android:mimeType
-		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:48:19-48
-uses-permission#android.permission.INTERNET
-ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml:6:5-66
-MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\walex\.gradle\caches\transforms-3\8bbca67cc5a32c5ad0e6edc351921bed\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\walex\.gradle\caches\transforms-3\8bbca67cc5a32c5ad0e6edc351921bed\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
-	android:name
-		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml:6:22-64
+		ADDED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\main\AndroidManifest.xml:49:19-48
 uses-sdk
 INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\walex\OneDrive\Documentos\konsi\android\app\src\debug\AndroidManifest.xml
