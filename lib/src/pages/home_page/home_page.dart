@@ -32,6 +32,10 @@ class _HomePageState extends State<HomePage> {
                 return const LoadingPageWidget();
               } else {
                 return GoogleMap(
+                  onMapCreated: (GoogleMapController controller) {
+                    // Armazene o controlador para uso posterior
+                    homeController.mapController = controller;
+                  },
                   initialCameraPosition: CameraPosition(
                     target: LatLng(
                       homeController.currentPosition!.latitude,
@@ -47,6 +51,14 @@ class _HomePageState extends State<HomePage> {
                         homeController.currentPosition!.longitude,
                       ),
                     ),
+                    if (homeController.coordinates != null)
+                      Marker(
+                        markerId: const MarkerId('searchedLocation'),
+                        position: LatLng(
+                          homeController.coordinates!['lat'],
+                          homeController.coordinates!['lng'],
+                        ),
+                      )
                   },
                 );
               }
@@ -67,7 +79,7 @@ class _HomePageState extends State<HomePage> {
           }),
           Observer(builder: (_) {
             return Visibility(
-              visible: homeController.suggestions.isNotEmpty,
+              visible: homeController.searchText != '',
               child: Positioned(
                 top: 120,
                 left: 16,

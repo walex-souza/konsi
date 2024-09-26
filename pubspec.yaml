@@ -40,6 +40,8 @@ dependencies:
   google_maps_flutter: ^2.9.0
   geocoding: ^3.0.0
   geolocator: ^13.0.1
+  dio: ^5.7.0
+  get_it: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -48,9 +50,8 @@ dev_dependencies:
   mobx_codegen: ^2.6.1
   flutter_lints: ^4.0.0
   flutter_native_splash: ^2.4.1
+ 
   
-
-
 flutter_native_splash:
   color: '#2E8896'
   image: assets/images/android_logo.png

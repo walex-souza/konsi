@@ -1,35 +1,45 @@
+import 'dart:ui';
+
 import 'package:geolocator/geolocator.dart';
+import 'package:get_it/get_it.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:konsi/src/models/address_model.dart';
+import 'package:konsi/src/services/cep_service.dart';
+import 'package:konsi/src/services/geocoding_service.dart';
 import 'package:mobx/mobx.dart';
 part 'home_controller.g.dart';
 
 class HomeController = HomeControllerBase with _$HomeController;
 
 abstract class HomeControllerBase with Store {
+  final CepService _cepService = GetIt.I<CepService>();
+  final GeocodingService geocodingService = GetIt.I<GeocodingService>();
+
   @observable
   String searchText = '';
 
   @observable
-  ObservableList<String> suggestions = ObservableList<String>();
+  AddressModel? address;
 
-  // Lista de CEPs estática, não precisa ser observável
-  List<String> ceps = [
-    '01000-000',
-    '01001-000',
-    '01002-000',
-    '01003-000',
-    '01004-000',
-    '01005-000',
-    '02000-000',
-    '02001-000',
-    '03000-000',
-    '04000-000',
-  ];
+  @observable
+  String? error;
+
+  @observable
+  Map<String, dynamic>? coordinates;
+
+  @observable
+  ObservableList<AddressModel> suggestions = ObservableList<AddressModel>();
+
+  // List<AddressModel> ceps = [];
 
   @observable
   Position? currentPosition;
 
   @observable
   String? errorMessage;
+
+  @observable
+  GoogleMapController? mapController;
 
   @action
   Future<void> fetchCurrentLocation() async {
@@ -66,18 +76,52 @@ abstract class HomeControllerBase with Store {
   @action
   void updateSearchText(String? value) {
     searchText = value ?? '';
-    _filterSuggestionsCep();
+    searchCep(value ?? '');
   }
 
   @action
-  void _filterSuggestionsCep() {
-    if (searchText.isNotEmpty) {
-      suggestions.clear(); // Limpa a lista antes de adicionar novos itens
-      suggestions.addAll(
-        ceps.where((cep) => cep.contains(searchText)).toList(),
-      );
+  void _filterSuggestionsCep() {}
+
+  @action
+  Future<void> searchCep(String cep) async {
+    error = null; // Reseta o erro
+    address = await _cepService.searchCep(cep);
+    if (address == null) {
+      if (searchText.isNotEmpty && suggestions.isNotEmpty) {
+        suggestions.any((cep) => cep.cep.contains(searchText));
+      } else {
+        // suggestions.clear();
+      }
+      error = 'CEP não encontrado.';
     } else {
-      suggestions.clear(); // Limpa a lista se o campo de busca estiver vazio
+      if (!suggestions.any((e) => e.cep == searchText)) {
+        suggestions.add(
+          AddressModel(
+              cep: address?.cep ?? '',
+              logradouro: address?.logradouro ?? '',
+              bairro: address?.bairro ?? '',
+              localidade: address?.localidade ?? '',
+              uf: address?.uf ?? ''),
+        );
+      }
+
+      await getCoordinates(address!.formattedAddress);
+    }
+  }
+
+  @action
+  Future<void> getCoordinates(String address) async {
+    coordinates = await geocodingService.getCoordinatesFromAddress(address);
+  }
+
+  @action
+  void moveCameraToCoordinates(GoogleMapController mapController) {
+    if (coordinates != null) {
+      mapController.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(coordinates!['lat'], coordinates!['lng']),
+        ),
+      );
     }
   }
 }

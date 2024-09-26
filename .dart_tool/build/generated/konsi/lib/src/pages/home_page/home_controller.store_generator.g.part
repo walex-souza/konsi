@@ -21,17 +21,65 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$addressAtom =
+      Atom(name: 'HomeControllerBase.address', context: context);
+
+  @override
+  AddressModel? get address {
+    _$addressAtom.reportRead();
+    return super.address;
+  }
+
+  @override
+  set address(AddressModel? value) {
+    _$addressAtom.reportWrite(value, super.address, () {
+      super.address = value;
+    });
+  }
+
+  late final _$errorAtom =
+      Atom(name: 'HomeControllerBase.error', context: context);
+
+  @override
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
+  late final _$coordinatesAtom =
+      Atom(name: 'HomeControllerBase.coordinates', context: context);
+
+  @override
+  Map<String, dynamic>? get coordinates {
+    _$coordinatesAtom.reportRead();
+    return super.coordinates;
+  }
+
+  @override
+  set coordinates(Map<String, dynamic>? value) {
+    _$coordinatesAtom.reportWrite(value, super.coordinates, () {
+      super.coordinates = value;
+    });
+  }
+
   late final _$suggestionsAtom =
       Atom(name: 'HomeControllerBase.suggestions', context: context);
 
   @override
-  ObservableList<String> get suggestions {
+  ObservableList<AddressModel> get suggestions {
     _$suggestionsAtom.reportRead();
     return super.suggestions;
   }
 
   @override
-  set suggestions(ObservableList<String> value) {
+  set suggestions(ObservableList<AddressModel> value) {
     _$suggestionsAtom.reportWrite(value, super.suggestions, () {
       super.suggestions = value;
     });
@@ -69,6 +117,22 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$mapControllerAtom =
+      Atom(name: 'HomeControllerBase.mapController', context: context);
+
+  @override
+  GoogleMapController? get mapController {
+    _$mapControllerAtom.reportRead();
+    return super.mapController;
+  }
+
+  @override
+  set mapController(GoogleMapController? value) {
+    _$mapControllerAtom.reportWrite(value, super.mapController, () {
+      super.mapController = value;
+    });
+  }
+
   late final _$fetchCurrentLocationAsyncAction =
       AsyncAction('HomeControllerBase.fetchCurrentLocation', context: context);
 
@@ -76,6 +140,22 @@ mixin _$HomeController on HomeControllerBase, Store {
   Future<void> fetchCurrentLocation() {
     return _$fetchCurrentLocationAsyncAction
         .run(() => super.fetchCurrentLocation());
+  }
+
+  late final _$searchCepAsyncAction =
+      AsyncAction('HomeControllerBase.searchCep', context: context);
+
+  @override
+  Future<void> searchCep(String cep) {
+    return _$searchCepAsyncAction.run(() => super.searchCep(cep));
+  }
+
+  late final _$getCoordinatesAsyncAction =
+      AsyncAction('HomeControllerBase.getCoordinates', context: context);
+
+  @override
+  Future<void> getCoordinates(String address) {
+    return _$getCoordinatesAsyncAction.run(() => super.getCoordinates(address));
   }
 
   late final _$HomeControllerBaseActionController =
@@ -104,12 +184,27 @@ mixin _$HomeController on HomeControllerBase, Store {
   }
 
   @override
+  void moveCameraToCoordinates(GoogleMapController mapController) {
+    final _$actionInfo = _$HomeControllerBaseActionController.startAction(
+        name: 'HomeControllerBase.moveCameraToCoordinates');
+    try {
+      return super.moveCameraToCoordinates(mapController);
+    } finally {
+      _$HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 searchText: ${searchText},
+address: ${address},
+error: ${error},
+coordinates: ${coordinates},
 suggestions: ${suggestions},
 currentPosition: ${currentPosition},
-errorMessage: ${errorMessage}
+errorMessage: ${errorMessage},
+mapController: ${mapController}
     ''';
   }
 }

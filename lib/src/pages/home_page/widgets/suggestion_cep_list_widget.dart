@@ -10,7 +10,7 @@ class SuggestionCepListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xffF6F6F6),
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
           BoxShadow(
@@ -29,11 +29,64 @@ class SuggestionCepListWidget extends StatelessWidget {
             itemCount: homeController.suggestions.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(homeController.suggestions[index]),
-                onTap: () {
-                  homeController.updateSearchText(homeController.suggestions[
-                      index]); // Preenche o campo de texto com o CEP selecionado
-                  homeController.suggestions.clear();
+                title: Row(
+                  children: [
+                    Image.asset(
+                      'assets/icons/cep_icon.png',
+                      height: 40,
+                      width: 40,
+                    ),
+                    const SizedBox(width: 20),
+                    Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(homeController.suggestions[index].cep),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.6,
+                              child: RichText(
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  text: homeController
+                                              .suggestions[index].logradouro !=
+                                          ''
+                                      ? homeController
+                                          .suggestions[index].logradouro
+                                      : '',
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: [
+                                    TextSpan(
+                                        text: homeController.suggestions[index]
+                                                    .bairro !=
+                                                ''
+                                            ? ' - ${homeController.suggestions[index].bairro} - '
+                                            : ''),
+                                    TextSpan(
+                                        text: homeController
+                                            .suggestions[index].localidade),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                onTap: () async {
+                  homeController
+                      .updateSearchText(homeController.suggestions[index].cep);
+
+                  await homeController
+                      .searchCep(homeController.suggestions[index].cep);
+
+                  homeController
+                      .moveCameraToCoordinates(homeController.mapController!);
+
+                  homeController.searchText = '';
                 },
               );
             },

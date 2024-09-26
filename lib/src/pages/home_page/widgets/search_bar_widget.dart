@@ -9,18 +9,23 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        hintText: 'Digite o CEP...',
-        prefixIcon: const Icon(Icons.search, color: Colors.grey),
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: BorderSide.none, // Remove a borda
+    return Material(
+      borderRadius: BorderRadius.circular(10),
+      elevation: 4,
+      child: TextField(
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          hintText: 'Buscar',
+          hintStyle: const TextStyle(color: Color(0xff7C7C7C)),
+          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          filled: true,
+          fillColor: const Color(0xffF6F6F6),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none, // Remove a borda
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 15),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 15),
       ),
     );
   }
