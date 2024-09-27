@@ -8,7 +8,7 @@ class DioService {
 
   DioService._internal() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://viacep.com.br/ws/', // URL base para a API de CEPs
+      baseUrl: 'https://viacep.com.br/ws/',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {
@@ -16,7 +16,6 @@ class DioService {
       },
     ));
 
-    // Adicionar logs das requisições
     dio.interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,

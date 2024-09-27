@@ -17,7 +17,7 @@ class SuggestionCepListWidget extends StatelessWidget {
             color: Colors.black26,
             blurRadius: 4,
             spreadRadius: 1,
-            offset: Offset(0, 2), // posição da sombra
+            offset: Offset(0, 2),
           ),
         ],
       ),
@@ -28,7 +28,7 @@ class SuggestionCepListWidget extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.only(
-                top: 120, left: 15, right: 15, bottom: 10), // Evita rolagem
+                top: 120, left: 15, right: 15, bottom: 10),
             itemCount: homeController.suggestions.length,
             itemBuilder: (context, index) {
               return ListTile(

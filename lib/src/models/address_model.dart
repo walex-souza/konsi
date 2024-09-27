@@ -17,7 +17,6 @@ class AddressModel {
     this.complement,
   });
 
-  // Factory para criar uma instância do modelo a partir de um JSON
   factory AddressModel.fromJson(Map<String, dynamic> json) {
     return AddressModel(
       cep: json['cep'] ?? '',
@@ -40,6 +39,5 @@ class AddressModel {
     };
   }
 
-  // Método que retorna o endereço formatado como uma string
   String get formattedAddress => '$logradouro, $bairro, $localidade - $uf';
 }

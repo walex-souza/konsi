@@ -25,7 +25,7 @@ abstract class _BottomNavigationBarControllerBase with Store {
 
   final List<Widget> pages = [
     const HomePage(),
-    const PassbookPage(),
+    PassbookPage(),
   ];
 
   void onItemTapped(int index) {

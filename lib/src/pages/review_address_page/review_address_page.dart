@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:konsi/src/common/widgets/primaryButton_widget.dart';
@@ -63,8 +65,8 @@ class ReviewAddressPage extends StatelessWidget {
             const Spacer(),
             PrimaryButtonWidget(
               title: 'Confirmar',
-              onPressed: () {
-                reviewAddressController.saveAddress(
+              onPressed: () async {
+                await reviewAddressController.saveAddressList(
                   AddressModel(
                     cep: address?.cep ?? '',
                     logradouro: address?.logradouro ?? '',
@@ -76,6 +78,10 @@ class ReviewAddressPage extends StatelessWidget {
                         reviewAddressController.complementController.text,
                   ),
                 );
+                Navigator.pop(context);
+                Navigator.pop(context);
+                reviewAddressController.numberController.clear();
+                reviewAddressController.complementController.clear();
               },
             ),
             const SizedBox(height: 20)

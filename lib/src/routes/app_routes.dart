@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:konsi/src/models/address_model.dart';
 import 'package:konsi/src/pages/bottom_navigation_bar_page/bottom_navigation_bar_page.dart';
 import 'package:konsi/src/pages/home_page/home_page.dart';
+import 'package:konsi/src/pages/passbook_page/passbook_page.dart';
 import 'package:konsi/src/pages/review_address_page/review_address_page.dart';
 
 import 'package:konsi/src/routes/route_names.dart';
@@ -22,6 +23,8 @@ class AppRoutes {
                       localidade: address.localidade,
                       uf: address.uf),
                 ));
+      case RouteNames.passbook:
+        return MaterialPageRoute(builder: (_) => PassbookPage());
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());
     }

@@ -35,8 +35,6 @@ abstract class HomeControllerBase with Store {
   @observable
   ObservableList<AddressModel> suggestions = ObservableList<AddressModel>();
 
-  // List<AddressModel> ceps = [];
-
   @observable
   Position? currentPosition;
 
@@ -99,7 +97,7 @@ abstract class HomeControllerBase with Store {
 
   @action
   Future<void> searchCep(String cep) async {
-    error = null; // Reseta o erro
+    error = null;
     address = await _cepService.searchCep(cep);
     if (address == null) {
       error = 'CEP não encontrado.';

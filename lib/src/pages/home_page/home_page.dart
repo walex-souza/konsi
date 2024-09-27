@@ -109,11 +109,9 @@ class _HomePageState extends State<HomePage> {
             visible: homeController.currentPosition != null,
             child: FloatingActionButton(
               shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(30.0), // Arredondar as bordas
+                borderRadius: BorderRadius.circular(30.0),
               ),
               backgroundColor: const Color(0xff2E8896),
-
               onPressed: () async {
                 homeController.updateSearchText(homeController.searchText);
 
@@ -129,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               child: const Icon(
                 Icons.search,
                 color: Colors.white,
-              ), // Texto que aparece ao segurar o botão
+              ),
             ),
           );
         },

@@ -15,11 +15,14 @@ abstract class _ReviewAddressControllerBase with Store {
   TextEditingController complementController = TextEditingController();
 
   @action
-  Future<void> saveAddress(AddressModel adress) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> saveAddressList(AddressModel address) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String>? jsonList = prefs.getStringList('addressList');
 
-    String addressJson = jsonEncode(adress.toJson());
+    jsonList ??= [];
 
-    await prefs.setString('addressList', addressJson);
+    jsonList.add(jsonEncode(address.toJson()));
+
+    await prefs.setStringList('addressList', jsonList);
   }
 }
