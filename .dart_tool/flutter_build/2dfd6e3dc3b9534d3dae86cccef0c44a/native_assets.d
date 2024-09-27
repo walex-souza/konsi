@@ -1,1 +1,0 @@
- C:\\Users\\walex\\OneDrive\\Documentos\\konsi\\.dart_tool\\flutter_build\\2dfd6e3dc3b9534d3dae86cccef0c44a\\native_assets.yaml: 

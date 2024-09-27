@@ -4,6 +4,8 @@ class AddressModel {
   final String bairro;
   final String localidade;
   final String uf;
+  final String? number;
+  final String? complement;
 
   AddressModel({
     required this.cep,
@@ -11,6 +13,8 @@ class AddressModel {
     required this.bairro,
     required this.localidade,
     required this.uf,
+    this.number,
+    this.complement,
   });
 
   // Factory para criar uma instância do modelo a partir de um JSON
@@ -22,6 +26,18 @@ class AddressModel {
       localidade: json['localidade'] ?? '',
       uf: json['uf'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'cep': cep,
+      'logradouro': logradouro,
+      'bairro': bairro,
+      'localidade': localidade,
+      'uf': uf,
+      'number': number,
+      'complement': complement,
+    };
   }
 
   // Método que retorna o endereço formatado como uma string

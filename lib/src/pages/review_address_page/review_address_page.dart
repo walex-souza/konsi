@@ -63,7 +63,20 @@ class ReviewAddressPage extends StatelessWidget {
             const Spacer(),
             PrimaryButtonWidget(
               title: 'Confirmar',
-              onPressed: () {},
+              onPressed: () {
+                reviewAddressController.saveAddress(
+                  AddressModel(
+                    cep: address?.cep ?? '',
+                    logradouro: address?.logradouro ?? '',
+                    bairro: address?.bairro ?? '',
+                    localidade: address?.localidade ?? '',
+                    uf: address?.uf ?? '',
+                    number: reviewAddressController.numberController.text,
+                    complement:
+                        reviewAddressController.complementController.text,
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20)
           ],
